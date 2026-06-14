@@ -1,147 +1,155 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
-import blueBall from "../assets/blueball.png";
-import trophyImg from "../assets/gass.png";
-import earthImg from "../assets/earth.png";
-import rightImg from "../assets/right.png";
+
+import mensAward from "../assets/mtrophy.png";
+import womensAward from "../assets/wtrophy.png";
+import yachineAward from "../assets/yachine.png";
+import kopaAward from "../assets/kopa.png";
 
 function About() {
+  const [clubs, setClubs] = useState([]);
+
+ useEffect(() => {
+  const fetchClubs = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/api/clubs");
+      setClubs(response.data);
+    } catch (error) {
+      console.error("API Error:", error);
+    }
+  };
+
+  fetchClubs();
+}, []);
+
+  const categories = [
+    {
+      title: "MEN'S BALLON D'OR",
+      image: mensAward,
+      text: "Celebrating the best male footballers in the world.",
+    },
+    {
+      title: "WOMEN'S BALLON D'OR",
+      image: womensAward,
+      text: "Honoring the top female footballers and their achievements.",
+    },
+    {
+      title: "YACHINE TROPHY",
+      image: yachineAward,
+      text: "Recognizing the best goalkeeper performances.",
+    },
+    {
+      title: "KOPA TROPHY",
+      image: kopaAward,
+      text: "Highlighting the brightest young football talents.",
+    },
+  ];
+
   return (
     <>
       <Navbar />
 
       <div className="about-page">
-        <section className="about-hero">
-          <h1>ABOUT US</h1>
-          <p>Celebrating Football Excellence</p>
+        
+
+        <section className="about-section">
+          <h1>ABOUT BALLON D'OR 2026</h1>
+          <p>
+            Ballon d'Or 2026 is a modern football voting platform where users
+            can explore nominees, view detailed player profiles, vote once per
+            category, and follow live results powered by the database.
+          </p>
         </section>
 
-        <section className="about-intro">
-  <div className="about-image-box">
-    <img src={blueBall} alt="Golden football" />
+        
+
+        <section className="clubs-section">
+          <h2>FEATURED CLUBS</h2>
+
+          <div className="clubs-grid">
+           {clubs.map((club) => (
+  <div className="club-card" key={club.name}>
+    <img src={club.badge} alt={club.name} />
+    <h3>{club.name}</h3>
+    <p>{club.league}</p>
+    <p>{club.country}</p>
+    <p>{club.stadium}</p>
   </div>
+))}
+          </div>
+        </section>
 
-  <div className="about-text">
-    <h2>WHO WE ARE</h2>
-    <p>
-      We are a digital football voting platform created to celebrate the
-      greatest players across different award categories.
-    </p>
-    <p>
-      The platform allows users to browse nominees, view player profiles, cast
-      votes, and follow live results in a simple and transparent way.
-    </p>
-    <p>
-      Our goal is to make the Ballon d'Or experience more interactive by giving
-      fans a voice while keeping the voting process clear, organized, and easy
-      to use.
-    </p>
-  </div>
-</section>
+        <section className="award-section">
+          <h2>AWARD CATEGORIES</h2>
 
-<section className="about-mission">
-  <h2>OUR MISSION</h2>
+          <div className="award-grid">
+            {categories.map((category) => (
+              <div className="award-card" key={category.title}>
+                <img src={category.image} alt={category.title} />
+                <div>
+                  <h3>{category.title}</h3>
+                  <p>{category.text}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
 
-  <div className="mission-line-grid">
-    <div className="mission-item">
-      <img src={trophyImg} alt="Promote excellence" />
-      <h3>Promote Excellence</h3>
-      <p>
-        We celebrate outstanding football performances and highlight the
-        players who show talent, dedication, and achievement.
-      </p>
-    </div>
-
-    <div className="mission-item">
-      <img src={earthImg} alt="Connect fans" />
-      <h3>Connect Fans</h3>
-      <p>
-        We bring football fans together by allowing them to participate in the
-        voting journey and support their favorite nominees.
-      </p>
-    </div>
-
-    <div className="mission-item">
-      <img src={rightImg} alt="Ensure transparency" />
-      <h3>Ensure Transparency</h3>
-      <p>
-        We provide a clear voting experience where results can be viewed and
-        compared through a live results page.
-      </p>
-    </div>
-  </div>
-</section>
-
-        <section className="how-it-works">
+        <section className="how-section">
           <h2>HOW IT WORKS</h2>
 
           <div className="steps-grid">
             <div>
               <span>1</span>
-              <h3>REGISTER / LOGIN</h3>
-              <p>Create your account or login.</p>
+              <h3>CREATE ACCOUNT</h3>
+              <p>Register or login to access voting.</p>
             </div>
 
             <div>
               <span>2</span>
-              <h3>BROWSE NOMINEES</h3>
-              <p>Explore nominees in each category.</p>
+              <h3>CHOOSE CATEGORY</h3>
+              <p>Select the award category you want.</p>
             </div>
 
             <div>
               <span>3</span>
               <h3>CAST YOUR VOTE</h3>
-              <p>Vote for your favorite nominee.</p>
+              <p>Vote for one nominee in each category.</p>
             </div>
 
             <div>
               <span>4</span>
-              <h3>LIVE RESULTS</h3>
-              <p>View real-time voting progress.</p>
+              <h3>TRACK RESULTS</h3>
+              <p>Watch live results update from the database.</p>
             </div>
           </div>
         </section>
 
-        <section className="about-categories">
-  <h2>OUR CATEGORIES</h2>
+    <section className="contact-section">
+  <h2>CONTACT US</h2>
 
-  <div className="category-line-list">
-    <div className="category-line-item">
-      <span>🏆</span>
-      <p>MEN’S<br />BALLON D’OR</p>
+  <div className="contact-card-single">
+    <div className="contact-item">
+      <h3>Email</h3>
+      <p>support@ballondor2026.com</p>
     </div>
 
-    <div className="category-line-item">
-      <span>🏆</span>
-      <p>WOMEN’S<br />BALLON D’OR</p>
+    <div className="contact-item">
+      <h3>Location</h3>
+      <p>Paris, France</p>
     </div>
 
-    <div className="category-line-item">
-      <span>🧤</span>
-      <p>YACHINE<br />TROPHY</p>
+    <div className="contact-item">
+      <h3>Platform</h3>
+      <p>Ballon d'Or Voting System</p>
     </div>
-
-    <div className="category-line-item">
-      <span>⚽</span>
-      <p>KOPA<br />TROPHY</p>
-    </div>
-  </div>
-</section>
-
-<section className="support-line-box">
-  <div className="support-icon">✉</div>
-
-  <div>
-    <h2>WE’RE HERE FOR YOU</h2>
-    <p>
-      Have questions, suggestions, or need support? Feel free to contact us
-      anytime. Your feedback helps us improve the experience.
-    </p>
   </div>
 </section>
       </div>
-
       <Footer />
     </>
   );
