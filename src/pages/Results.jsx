@@ -1,42 +1,68 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 
 function Results() {
-  const results = [
-    {
-      category: "MEN'S BALLON D'OR",
-      players: [
-        { rank: 1, name: "Kylian Mbappé", percentage: 45 },
-        { rank: 2, name: "Erling Haaland", percentage: 30 },
-        { rank: 3, name: "Jude Bellingham", percentage: 25 },
-      ],
-    },
-    {
-      category: "WOMEN'S BALLON D'OR",
-      players: [
-        { rank: 1, name: "Aitana Bonmatí", percentage: 46 },
-        { rank: 2, name: "Alexia Putellas", percentage: 32 },
-        { rank: 3, name: "Sam Kerr", percentage: 22 },
-      ],
-    },
-    {
-      category: "YACHINE TROPHY",
-      players: [
-        { rank: 1, name: "Thibaut Courtois", percentage: 47 },
-        { rank: 2, name: "Emiliano Martínez", percentage: 29 },
-        { rank: 3, name: "Alisson Becker", percentage: 24 },
-      ],
-    },
-    {
-      category: "KOPA TROPHY",
-      players: [
-        { rank: 1, name: "Lamine Yamal", percentage: 48 },
-        { rank: 2, name: "Jamal Musiala", percentage: 31 },
-        { rank: 3, name: "Gavi", percentage: 21 },
-      ],
-    },
-  ];
+  const [results, setResults] = useState([]);
+
+ useEffect(() => {
+  const fetchResults = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:5000/api/nominees"
+      );
+
+      const nominees = response.data;
+
+      const categories = [
+        { id: 1, name: "MEN'S BALLON D'OR" },
+        { id: 2, name: "WOMEN'S BALLON D'OR" },
+        { id: 3, name: "YACHINE TROPHY" },
+        { id: 4, name: "KOPA TROPHY" },
+      ];
+
+      const formattedResults = categories.map((category) => {
+        const players = nominees
+          .filter(
+            (player) => player.category_id === category.id
+          )
+          .sort((a, b) => b.votes - a.votes)
+          .slice(0, 3);
+
+        const totalVotes = players.reduce(
+          (sum, player) => sum + player.votes,
+          0
+        );
+
+        return {
+          category: category.name,
+          players: players.map((player, index) => ({
+            rank: index + 1,
+            name: player.name,
+            percentage:
+              totalVotes > 0
+                ? Math.round(
+                    (player.votes / totalVotes) * 100
+                  )
+                : 0,
+          })),
+        };
+      });
+
+      setResults(formattedResults);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  fetchResults();
+
+  const interval = setInterval(fetchResults, 5000);
+
+  return () => clearInterval(interval);
+}, []);
 
   return (
     <>

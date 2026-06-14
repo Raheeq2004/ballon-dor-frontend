@@ -1,3 +1,5 @@
+import axios from "axios";
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -7,18 +9,75 @@ import Footer from "../components/Footer";
 function Auth() {
   const [isLogin, setIsLogin] = useState(false);
 
+const [fullName, setFullName] = useState("");
+const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
+const [confirmPassword, setConfirmPassword] = useState("");
+
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
   e.preventDefault();
 
-  localStorage.setItem("isLoggedIn", "true");
+if (!email || !password) {
+  alert("Please enter email and password");
+  return;
+}
 
-  // temporary admin testing
-  if (isLogin) {
-    navigate("/admin");
-  } else {
-    navigate("/categories");
+  try {
+
+    if (!isLogin) {
+
+      if (password !== confirmPassword) {
+        alert("Passwords do not match");
+        return;
+      }
+
+      const response = await axios.post(
+        "http://localhost:5000/api/auth/register",
+        {
+          full_name: fullName,
+          email,
+          password,
+        }
+      );
+
+      console.log(response.data);
+
+      localStorage.setItem("isLoggedIn", "true");
+localStorage.setItem("user", JSON.stringify(response.data.user));
+
+      navigate("/categories");
+
+    } else {
+
+      const response = await axios.post(
+        "http://localhost:5000/api/auth/login",
+        {
+          email,
+          password,
+        }
+      );
+
+      console.log(response.data);
+
+      localStorage.setItem("isLoggedIn", "true");
+localStorage.setItem("user", JSON.stringify(response.data.user));
+
+      if (response.data.user.role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/categories");
+      }
+
+    }
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert("Authentication Failed");
+
   }
 };
 
@@ -47,10 +106,12 @@ function Auth() {
               <label className="form-label">FULL NAME</label>
 
               <input
-                type="text"
-                className="form-control auth-input"
-                placeholder="Enter your full name"
-              />
+  type="text"
+  className="form-control auth-input"
+  placeholder="Enter your full name"
+  value={fullName}
+  onChange={(e) => setFullName(e.target.value)}
+/>
             </div>
           )}
 
@@ -58,20 +119,24 @@ function Auth() {
             <label className="form-label">EMAIL ADDRESS</label>
 
             <input
-              type="email"
-              className="form-control auth-input"
-              placeholder="Enter your email"
-            />
+  type="email"
+  className="form-control auth-input"
+  placeholder="Enter your email"
+  value={email}
+  onChange={(e) => setEmail(e.target.value)}
+/>
           </div>
 
           <div className="mb-4">
             <label className="form-label">PASSWORD</label>
 
             <input
-              type="password"
-              className="form-control auth-input"
-              placeholder="Enter your password"
-            />
+  type="password"
+  className="form-control auth-input"
+  placeholder="Enter your password"
+  value={password}
+  onChange={(e) => setPassword(e.target.value)}
+/>
           </div>
 
           {!isLogin && (
@@ -81,10 +146,12 @@ function Auth() {
               </label>
 
               <input
-                type="password"
-                className="form-control auth-input"
-                placeholder="Confirm your password"
-              />
+  type="password"
+  className="form-control auth-input"
+  placeholder="Confirm your password"
+  value={confirmPassword}
+  onChange={(e) => setConfirmPassword(e.target.value)}
+/>
             </div>
           )}
 

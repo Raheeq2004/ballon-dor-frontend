@@ -1,37 +1,14 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 function AdminDashboard() {
   const navigate = useNavigate();
-  const [nominees, setNominees] = useState([
-    {
-      id: 1,
-      name: "Vinícius Jr",
-      category: "Men's Ballon D'Or",
-      club: "Real Madrid",
-    },
-    {
-      id: 2,
-      name: "Aitana Bonmatí",
-      category: "Women's Ballon D'Or",
-      club: "Barcelona",
-    },
-    {
-      id: 3,
-      name: "Emiliano Martínez",
-      category: "Yachine Trophy",
-      club: "Aston Villa",
-    },
-    {
-      id: 4,
-      name: "Jude Bellingham",
-      category: "Kopa Trophy",
-      club: "Real Madrid",
-    },
-  ]);
 
+  const [nominees, setNominees] = useState([]);
   const [search, setSearch] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("All");
 
@@ -47,13 +24,44 @@ function AdminDashboard() {
     club: "",
   });
 
+  const categoryMap = {
+    "Men's Ballon D'Or": 1,
+    "Women's Ballon D'Or": 2,
+    "Yachine Trophy": 3,
+    "Kopa Trophy": 4,
+  };
+
+  const getCategoryName = (categoryId) => {
+    if (categoryId === 1) return "Men's Ballon D'Or";
+    if (categoryId === 2) return "Women's Ballon D'Or";
+    if (categoryId === 3) return "Yachine Trophy";
+    if (categoryId === 4) return "Kopa Trophy";
+    return "Unknown";
+  };
+
+  const fetchNominees = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/api/nominees");
+      setNominees(response.data);
+    } catch (error) {
+      console.error(error);
+      alert("Failed to load nominees");
+    }
+  };
+
+  useEffect(() => {
+    fetchNominees();
+  }, []);
+
   const filteredNominees = nominees.filter((nominee) => {
+    const categoryName = getCategoryName(nominee.category_id);
+
     const matchesSearch = nominee.name
       .toLowerCase()
       .includes(search.toLowerCase());
 
     const matchesCategory =
-      categoryFilter === "All" || nominee.category === categoryFilter;
+      categoryFilter === "All" || categoryName === categoryFilter;
 
     return matchesSearch && matchesCategory;
   });
@@ -73,7 +81,7 @@ function AdminDashboard() {
 
     setFormData({
       name: nominee.name,
-      category: nominee.category,
+      category: getCategoryName(nominee.category_id),
       club: nominee.club,
     });
 
@@ -101,50 +109,57 @@ function AdminDashboard() {
     });
   };
 
-  const handleAddNominee = (e) => {
+  const handleAddNominee = async (e) => {
     e.preventDefault();
 
-    const newNominee = {
-      id: nominees.length + 1,
-      name: formData.name,
-      category: formData.category,
-      club: formData.club,
-    };
+    try {
+      await axios.post("http://localhost:5000/api/nominees", {
+        name: formData.name,
+        category_id: categoryMap[formData.category],
+        club: formData.club,
+      });
 
-    setNominees([...nominees, newNominee]);
-
-    closeModals();
+      await fetchNominees();
+      closeModals();
+    } catch (error) {
+      console.error(error);
+      alert("Failed to add nominee");
+    }
   };
 
-  const handleEditNominee = (e) => {
+  const handleEditNominee = async (e) => {
     e.preventDefault();
 
-    const updatedNominees = nominees.map((nominee) => {
-      if (nominee.id === selectedNominee.id) {
-        return {
-          ...nominee,
+    try {
+      await axios.put(
+        `http://localhost:5000/api/nominees/${selectedNominee.id}`,
+        {
           name: formData.name,
-          category: formData.category,
+          category_id: categoryMap[formData.category],
           club: formData.club,
-        };
-      }
+        }
+      );
 
-      return nominee;
-    });
-
-    setNominees(updatedNominees);
-
-    closeModals();
+      await fetchNominees();
+      closeModals();
+    } catch (error) {
+      console.error(error);
+      alert("Failed to update nominee");
+    }
   };
 
-  const handleDeleteNominee = () => {
-    const updatedNominees = nominees.filter(
-      (nominee) => nominee.id !== selectedNominee.id
-    );
+  const handleDeleteNominee = async () => {
+    try {
+      await axios.delete(
+        `http://localhost:5000/api/nominees/${selectedNominee.id}`
+      );
 
-    setNominees(updatedNominees);
-
-    closeModals();
+      await fetchNominees();
+      closeModals();
+    } catch (error) {
+      console.error(error);
+      alert("Failed to delete nominee");
+    }
   };
 
   return (
@@ -173,16 +188,10 @@ function AdminDashboard() {
             <option>Kopa Trophy</option>
           </select>
 
-         <div className="admin-buttons">
+          <div className="admin-buttons">
+            <button onClick={() => navigate("/results")}>VIEW RESULTS</button>
 
-          <button onClick={() => navigate("/results")}>
-           VIEW RESULTS
-          </button>
-
-          <button onClick={openAddModal}>
-            ADD NOMINEE
-            </button>
-
+            <button onClick={openAddModal}>ADD NOMINEE</button>
           </div>
         </div>
 
@@ -202,7 +211,7 @@ function AdminDashboard() {
               <tr key={nominee.id}>
                 <td>{nominee.id}</td>
                 <td>{nominee.name}</td>
-                <td>{nominee.category}</td>
+                <td>{getCategoryName(nominee.category_id)}</td>
                 <td>{nominee.club}</td>
                 <td>
                   <button

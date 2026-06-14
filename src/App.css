@@ -28,6 +28,7 @@ body {
   position: relative;
   overflow: hidden;
   cursor: pointer;
+  background: #0d0d0d;
 }
 
 .landing-image {
@@ -35,38 +36,6 @@ body {
   height: 100%;
   object-fit: cover;
   display: block;
-}
-
-.landing-content {
-  position: absolute;
-  top: 75%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-}
-
-.landing-content h1 {
-  font-family: "Bebas Neue", sans-serif;
-  font-size: 5.5rem;
-  font-weight: 300;
-  letter-spacing: 12px;
-  color: #f1b10e;
-  white-space: nowrap;
-}
-
-.landing-content h2 {
-  font-family: "Cinzel", serif;
-  font-size: 3rem;
-  font-weight: 400;
-  letter-spacing: 14px;
-  color: #f1b10e;
-}
-
-.landing-content p {
-  margin-top: 25px;
-  color: #fff6de;
-  font-size: 18px;
-  letter-spacing: 3px;
 }
 
 /* Navbar */
@@ -1583,300 +1552,380 @@ background: linear-gradient(to bottom,
 
 
 
-/* ABOUT PAGE */
+/* =========================
+   ABOUT PAGE
+========================= */
+
 
 .about-page {
   min-height: 100vh;
-  background: radial-gradient(circle at top, #1a1a1a, #0d0d0d 70%);
+  background: #0d0d0d;
   color: #fff6de;
   padding: 45px 80px;
+  padding-bottom: 0;
 }
 
-.about-hero {
-  text-align: center;
-  margin-bottom: 55px;
-}
+/* =========================
+   HERO BANNER
+========================= */
 
-.about-hero h1 {
-  font-family: "Bebas Neue", sans-serif;
-  font-size: 82px;
-  color: #f1b10e;
-  letter-spacing: 4px;
-  margin-bottom: 8px;
-}
-
-.about-hero p {
-  font-size: 22px;
-  color: #e5e7eb;
-}
-
-/* WHO WE ARE */
-
-.about-intro {
-  display: grid;
-  grid-template-columns: 420px 1fr;
-  gap: 70px;
-  align-items: center;
-  margin-bottom: 70px;
-}
-
-.about-image-box img {
+.about-new-hero {
   width: 100%;
-  border-radius: 22px;
-  box-shadow:
-    0 0 28px rgba(241, 177, 14, 0.25),
-    0 0 38px rgba(0, 120, 255, 0.12);
+  margin-bottom: 80px;
 }
 
-.about-text h2,
-.about-mission h2,
-.how-it-works h2,
-.about-categories h2,
-.support-box h2 {
+.about-new-hero img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  display: block;
+  border-bottom: 1px solid rgba(241, 177, 14, 0.3);
+}
+
+/* =========================
+   INTRO
+========================= */
+
+.about-section {
+  max-width: 1000px;
+  margin: auto;
+  text-align: center;
+  padding: 0 20px;
+  margin-bottom: 80px;
+}
+
+.about-section h1 {
   font-family: "Bebas Neue", sans-serif;
   color: #f1b10e;
-  font-size: 38px;
-  letter-spacing: 2px;
-  margin-bottom: 18px;
+  font-size: 80px;
+  letter-spacing: 3px;
+  margin-bottom: 20px;
 }
 
-.about-text h2::after,
-.about-mission h2::after,
-.how-it-works h2::after,
-.about-categories h2::after {
-  content: "";
-  display: block;
-  width: 90px;
-  height: 3px;
-  background: #f1b10e;
-  margin: 12px auto 0;
-  box-shadow: 0 0 14px rgba(241, 177, 14, 0.8);
-}
-
-.about-text h2::after {
-  margin-left: 0;
-}
-
-.about-text p {
-  color: #e5e7eb;
-  font-size: 17px;
+.about-section p {
+  color: #d1d5db;
+  font-size: 20px;
   line-height: 1.8;
-  max-width: 720px;
-  margin-bottom: 18px;
 }
 
-/* MISSION */
+/* =========================
+   OVERVIEW
+========================= */
 
-.about-mission {
-  text-align: center;
-  margin-bottom: 70px;
-}
-
-.mission-line-grid {
+.overview-grid {
+  max-width: 1300px;
+  margin: auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  margin-top: 35px;
+  gap: 25px;
+  padding: 0 40px;
+  margin-bottom: 90px;
 }
 
-.mission-item {
-  padding: 10px 45px;
+.overview-grid div {
+  background: #141414;
+  border: 1px solid rgba(241, 177, 14, 0.25);
+  border-radius: 20px;
+  padding: 35px;
   text-align: center;
+  transition: 0.3s;
 }
 
-.mission-item:not(:last-child) {
-  border-right: 1px solid rgba(241, 177, 14, 0.55);
+.overview-grid div:hover {
+  transform: translateY(-5px);
+  border-color: #f1b10e;
 }
 
-.mission-item img {
-  width: 115px;
-  height: 115px;
-  object-fit: cover;
-  border-radius: 50%;
-  margin-bottom: 18px;
-  box-shadow:
-    0 0 25px rgba(241, 177, 14, 0.25),
-    0 0 25px rgba(0, 120, 255, 0.12);
-}
-
-.mission-item h3 {
+.overview-grid h3 {
   font-family: "Bebas Neue", sans-serif;
   color: #f1b10e;
-  font-size: 28px;
-  letter-spacing: 1.5px;
-  margin-bottom: 12px;
+  font-size: 34px;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
 }
 
-.mission-item p {
-  color: #e5e7eb;
-  font-size: 15px;
+.overview-grid p {
+  color: #d1d5db;
   line-height: 1.7;
 }
 
-/* HOW IT WORKS */
+/* =========================
+   CLUBS
+========================= */
 
-.how-it-works {
+.clubs-section {
+  max-width: 1400px;
+  margin: auto;
+  padding: 0 40px;
+  margin-bottom: 100px;
+}
+
+.clubs-section h2 {
   text-align: center;
-  margin-bottom: 70px;
+  font-family: "Bebas Neue", sans-serif;
+  color: #f1b10e;
+  font-size: 60px;
+  letter-spacing: 2px;
+  margin-bottom: 50px;
+}
+
+.clubs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.club-card {
+  background: #141414;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(241, 177, 14, 0.2);
+  text-align: center;
+  transition: 0.3s;
+}
+
+.club-card:hover {
+  transform: translateY(-8px);
+  border-color: #f1b10e;
+}
+
+.club-card img {
+  width: 130px;
+  height: 130px;
+  object-fit: contain;
+  margin-top: 30px;
+}
+
+.club-card h3 {
+  color: #f1b10e;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 28px;
+}
+
+.club-card p {
+  color: #d1d5db;
+  margin-bottom: 12px;
+}
+
+/* =========================
+   AWARDS
+========================= */
+
+.award-section {
+  max-width: 1400px;
+  margin: auto;
+  padding: 0 40px;
+  margin-bottom: 100px;
+}
+
+.award-section h2 {
+  text-align: center;
+  font-family: "Bebas Neue", sans-serif;
+  color: #f1b10e;
+  font-size: 60px;
+  letter-spacing: 2px;
+  margin-bottom: 50px;
+}
+
+.award-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+.award-card {
+  background: #141414;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(241, 177, 14, 0.25);
+  transition: 0.3s;
+}
+
+.award-card:hover {
+  transform: translateY(-8px);
+  border-color: #f1b10e;
+}
+
+.award-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.award-card div {
+  padding: 15px;
+}
+
+.award-card h3 {
+  color: #f1b10e;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 34px;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.award-card p {
+  color: #d1d5db;
+  line-height: 1.7;
+}
+
+/* =========================
+   HOW IT WORKS
+========================= */
+
+.how-section {
+  max-width: 1400px;
+  margin: auto;
+  padding: 0 40px;
+  padding-bottom: 100px;
+}
+
+.how-section h2 {
+  text-align: center;
+  font-family: "Bebas Neue", sans-serif;
+  color: #f1b10e;
+  font-size: 60px;
+  letter-spacing: 2px;
+  margin-bottom: 50px;
 }
 
 .steps-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 22px;
-  margin-top: 35px;
+  gap: 25px;
 }
 
 .steps-grid div {
-  background: #151515;
-  border: 1px solid rgba(241, 177, 14, 0.3);
-  border-radius: 18px;
-  padding: 26px 20px;
-  box-shadow:
-    0 0 18px rgba(241, 177, 14, 0.08),
-    0 0 25px rgba(0, 90, 180, 0.06);
+  background: #141414;
+  border-radius: 20px;
+  border: 1px solid rgba(241, 177, 14, 0.25);
+  text-align: center;
+  padding: 35px 20px;
 }
 
 .steps-grid span {
-  display: inline-flex;
-  width: 54px;
-  height: 54px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid #f1b10e;
+  color: #f1b10e;
+  display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #f1b10e;
-  border-radius: 50%;
-  color: #f1b10e;
+  margin: auto;
+  margin-bottom: 20px;
   font-weight: bold;
-  margin-bottom: 16px;
+  font-size: 20px;
 }
 
 .steps-grid h3 {
-  font-family: "Bebas Neue", sans-serif;
   color: #f1b10e;
-  font-size: 24px;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 30px;
   letter-spacing: 1px;
+  margin-bottom: 15px;
 }
 
 .steps-grid p {
-  color: #e5e7eb;
-  font-size: 15px;
-  line-height: 1.6;
+  color: #d1d5db;
+  line-height: 1.7;
 }
 
-/* CATEGORIES */
+/* =========================
+   RESPONSIVE
+========================= */
 
-.about-categories {
+@media (max-width: 992px) {
+
+  .overview-grid,
+  .clubs-grid,
+  .award-grid,
+  .steps-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-section h1 {
+    font-size: 50px;
+  }
+
+  .clubs-section h2,
+  .award-section h2,
+  .how-section h2 {
+    font-size: 42px;
+  }
+
+  .about-new-hero img {
+    height: 300px;
+  }
+}
+
+.contact-section {
   text-align: center;
-  margin-bottom: 65px;
+  padding: 70px 0;
 }
 
-
-
-/* SUPPORT */
-
-.category-line-list {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  margin-top: 35px;
-  align-items: center;
-}
-
-.category-line-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 18px;
-  min-height: 95px;
-}
-
-.category-line-item:not(:last-child) {
-  border-right: 1px solid rgba(241, 177, 14, 0.55);
-}
-
-.category-line-item span {
-  font-size: 48px;
-  color: #f1b10e;
-  filter: drop-shadow(0 0 10px rgba(241, 177, 14, 0.65));
-}
-
-.category-line-item p {
-  color: #f1b10e;
+.contact-section h2 {
   font-family: "Bebas Neue", sans-serif;
-  font-size: 26px;
-  letter-spacing: 1px;
-  line-height: 1.1;
-  margin: 0;
-  text-align: left;
-}
-
-.support-line-box {
-  max-width: 950px;
-  margin: 0 auto 35px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 35px;
-}
-
-.support-icon {
   color: #f1b10e;
-  font-size: 70px;
-  min-width: 110px;
-  text-align: center;
-  border-right: 1px solid rgba(241, 177, 14, 0.55);
-  padding-right: 35px;
-  filter: drop-shadow(0 0 12px rgba(241, 177, 14, 0.55));
+  font-size: 60px;
+  letter-spacing: 3px;
+  margin-bottom: 50px;
 }
 
-.support-line-box h2 {
+.contact-section h2::after {
+  content: "";
+  display: block;
+  width: 90px;
+  height: 3px;
+  background: #f1b10e;
+  margin: 15px auto 0;
+  box-shadow: 0 0 14px rgba(241, 177, 14, 0.8);
+}
+
+.contact-card-single {
+  max-width: 1200px;
+  margin: 0 auto;
+
+  background: #111;
+  border: 1px solid rgba(241, 177, 14, 0.3);
+  border-radius: 24px;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  overflow: hidden;
+}
+
+.contact-item {
+  padding: 40px 20px;
+}
+
+.contact-item:not(:last-child) {
+  border-right: 1px solid rgba(241, 177, 14, 0.25);
+}
+
+.contact-item h3 {
   font-family: "Bebas Neue", sans-serif;
   color: #f1b10e;
   font-size: 34px;
   letter-spacing: 2px;
-  margin-bottom: 8px;
+  margin-bottom: 15px;
 }
 
-.support-line-box p {
+.contact-item p {
   color: #e5e7eb;
-  font-size: 16px;
-  line-height: 1.6;
+  font-size: 18px;
   margin: 0;
-  text-align: left;
 }
 
-/* RESPONSIVE */
-
-@media (max-width: 992px) {
-  .about-page {
-    padding: 40px 25px;
-  }
-
-  .about-intro,
-  .mission-line-grid,
-  .steps-grid,
-  .category-line-list {
+@media (max-width: 768px) {
+  .contact-card-single {
     grid-template-columns: 1fr;
   }
 
-  .mission-item:not(:last-child),
-  .category-line-item:not(:last-child) {
+  .contact-item:not(:last-child) {
     border-right: none;
-    border-bottom: 1px solid rgba(241, 177, 14, 0.4);
-    padding-bottom: 30px;
-  }
-
-  .support-line-box {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .support-icon {
-    border-right: none;
-    border-bottom: 1px solid rgba(241, 177, 14, 0.4);
-    padding-right: 0;
-    padding-bottom: 20px;
-  }
-
-  .support-line-box p {
-    text-align: center;
+    border-bottom: 1px solid rgba(241, 177, 14, 0.25);
   }
 }

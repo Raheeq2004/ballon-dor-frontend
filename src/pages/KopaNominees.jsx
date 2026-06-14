@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
@@ -14,68 +17,93 @@ import arda from "../assets/Arda.jpg";
 
 function KopaNominees() {
   const navigate = useNavigate();
-  const nominees = [
-    { id: "01", firstName: "Jude", lastName: "Bellingham", image: jude },
-    { id: "02", firstName: "Pablo", lastName: "Gavi", image: gavi },
-    { id: "03", firstName: "Jamal", lastName: "Musiala", image: musiala },
-    { id: "04", firstName: "Pedri", lastName: "González", image: pedri },
-    { id: "05", firstName: "Lamine", lastName: "Yamal", image: yamal },
-    { id: "06", firstName: "Florian", lastName: "Wirtz", image: wirtz },
-    { id: "07", firstName: "Endrick", lastName: "Felipe", image: endrick },
-    { id: "08", firstName: "Arda", lastName: "Güler", image: arda },
-  ];
+
+  const [nominees, setNominees] = useState([]);
+
+  const imageMap = {
+    "Jude Bellingham": jude,
+    "Pablo Gavi": gavi,
+    "Jamal Musiala": musiala,
+    "Pedri González": pedri,
+    "Lamine Yamal": yamal,
+    "Florian Wirtz": wirtz,
+    "Endrick Felipe": endrick,
+    "Arda Güler": arda,
+  };
+
+  useEffect(() => {
+    const fetchNominees = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/nominees");
+
+        const kopaNominees = response.data.filter(
+          (player) => player.category_id === 4
+        );
+
+        setNominees(kopaNominees);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchNominees();
+  }, []);
 
   return (
     <>
       <Navbar />
+
       <div className="category-tabs">
-  <button onClick={() => navigate("/nominees/men")}>
-    MEN'S BALLON D'OR
-  </button>
+        <button onClick={() => navigate("/nominees/men")}>
+          MEN'S BALLON D'OR
+        </button>
 
-  <button onClick={() => navigate("/nominees/women")}>
-    WOMEN'S BALLON D'OR
-  </button>
+        <button onClick={() => navigate("/nominees/women")}>
+          WOMEN'S BALLON D'OR
+        </button>
 
-  <button onClick={() => navigate("/nominees/yachine")}>
-    YACHINE TROPHY
-  </button>
+        <button onClick={() => navigate("/nominees/yachine")}>
+          YACHINE TROPHY
+        </button>
 
-  <button onClick={() => navigate("/nominees/kopa")}>
-    KOPA TROPHY
-  </button>
-</div>
+        <button onClick={() => navigate("/nominees/kopa")}>
+          KOPA TROPHY
+        </button>
+      </div>
 
       <div className="men-page">
-        
         <h1 className="nominees-title">NOMINEES</h1>
 
         <div className="container">
           <div className="row g-4">
-            {nominees.map((player) => (
+            {nominees.map((player, index) => (
               <div className="col-lg-3 col-md-4 col-sm-6" key={player.id}>
-          <div
-  className="nominee-card"
-  onClick={() => navigate(`/nominee/${player.id}`)}
->
-                  <div className="nominee-number">{player.id}</div>
+                <div
+                  className="nominee-card"
+                  onClick={() => navigate(`/nominee/${player.id}`)}
+                >
+                  <div className="nominee-number">
+                    {String(index + 1).padStart(2, "0")}
+                  </div>
 
                   <img
-                    src={player.image}
-                    alt={player.lastName}
+                    src={imageMap[player.name]}
+                    alt={player.name}
                     className="nominee-image women-image"
                   />
 
                   <div className="nominee-info">
-                    <p className="first-name">{player.firstName}</p>
-                    <h3 className="last-name">{player.lastName}</h3>
+                    <p className="first-name">{player.name.split(" ")[0]}</p>
+
+                    <h3 className="last-name">
+                      {player.name.split(" ").slice(1).join(" ")}
+                    </h3>
                   </div>
                 </div>
               </div>
             ))}
           </div>
         </div>
-
       </div>
 
       <Footer />
