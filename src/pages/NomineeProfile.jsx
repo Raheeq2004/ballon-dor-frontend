@@ -46,6 +46,8 @@ function NomineeProfile() {
   const [hasVoted, setHasVoted] = useState(false);
   const [player, setPlayer] = useState(null);
 
+  const [votePercentage, setVotePercentage] = useState(0);
+
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -92,20 +94,42 @@ function NomineeProfile() {
 };
 
   useEffect(() => {
-    const fetchPlayer = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:5000/api/nominees/${id}`
-        );
+  const fetchPlayer = async () => {
+    try {
+      const playerResponse = await axios.get(
+        `http://localhost:5000/api/nominees/${id}`
+      );
 
-        setPlayer(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+      const allNomineesResponse = await axios.get(
+        "http://localhost:5000/api/nominees"
+      );
 
-    fetchPlayer();
-  }, [id]);
+      const currentPlayer = playerResponse.data;
+      const allNominees = allNomineesResponse.data;
+
+      const sameCategoryNominees = allNominees.filter(
+        (nominee) => nominee.category_id === currentPlayer.category_id
+      );
+
+      const totalVotes = sameCategoryNominees.reduce(
+        (sum, nominee) => sum + Number(nominee.votes),
+        0
+      );
+
+      const percentage =
+        totalVotes > 0
+          ? Math.round((Number(currentPlayer.votes) / totalVotes) * 100)
+          : 0;
+
+      setPlayer(currentPlayer);
+      setVotePercentage(percentage);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  fetchPlayer();
+}, [id]);
 
   const handleVote = async () => {
   if (hasVoted) return;
@@ -127,6 +151,8 @@ function NomineeProfile() {
     );
 
     setPlayer(response.data.nominee);
+    window.location.reload();
+    
     setHasVoted(true);
 
     alert(response.data.message);
@@ -243,12 +269,15 @@ function NomineeProfile() {
 
           <div className="vote-progress-box">
             <div className="vote-left">
-              <h2>0%</h2>
+             <h2>{votePercentage}%</h2>
               <p>OF TOTAL VOTES</p>
             </div>
 
             <div className="vote-bar">
-              <div className="vote-fill"></div>
+              <div
+  className="vote-fill"
+  style={{ width: `${votePercentage}%` }}
+></div>
             </div>
 
             <div className="vote-right">
