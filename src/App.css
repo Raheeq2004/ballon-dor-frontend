@@ -38,6 +38,66 @@ body {
   height: 100%;
   object-fit: cover;
   display: block;
+
+  opacity: 0;
+  transform: scale(1.04);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+.landing-image.show-landing {
+  opacity: 1;
+  transform: scale(1);
+}
+
+
+
+.landing-loader {
+  position: fixed;
+  inset: 0;
+  background: #050505;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3000;
+  animation: loaderFadeOut 1.8s ease forwards;
+}
+
+.landing-loader img {
+  width: 150px;
+  filter: drop-shadow(0 0 25px rgba(241, 177, 14, 0.8));
+  animation: logoPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes logoPulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(0.95);
+    opacity: 0.6;
+  }
+}
+
+@keyframes loaderFadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  75% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 
 /* Navbar */
