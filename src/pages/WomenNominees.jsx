@@ -32,7 +32,7 @@ function WomenNominees() {
   useEffect(() => {
     const fetchNominees = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/nominees");
+        const response = await axios.get("https://ballon-dor-backend-production.up.railway.app/api/nominees");
         const womenNominees = response.data.filter(
           (player) => player.category_id === 2
         );

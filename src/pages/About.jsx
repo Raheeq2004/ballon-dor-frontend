@@ -16,7 +16,7 @@ function About() {
  useEffect(() => {
   const fetchClubs = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/clubs");
+      const response = await axios.get("https://ballon-dor-backend-production.up.railway.app/api/clubs");
       setClubs(response.data);
     } catch (error) {
       console.error("API Error:", error);

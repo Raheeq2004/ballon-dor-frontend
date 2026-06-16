@@ -11,7 +11,7 @@ function Results() {
   const fetchResults = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/nominees"
+        "https://ballon-dor-backend-production.up.railway.app/api/nominees"
       );
 
       const nominees = response.data;

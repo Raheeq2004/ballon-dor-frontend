@@ -34,7 +34,7 @@ if (!email || !password) {
       }
 
       const response = await axios.post(
-        "http://localhost:5000/api/auth/register",
+        "https://ballon-dor-backend-production.up.railway.app/api/auth/register",
         {
           full_name: fullName,
           email,
@@ -52,7 +52,7 @@ localStorage.setItem("user", JSON.stringify(response.data.user));
     } else {
 
       const response = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        "https://ballon-dor-backend-production.up.railway.app/api/auth/login",
         {
           email,
           password,

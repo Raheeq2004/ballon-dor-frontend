@@ -41,7 +41,7 @@ function AdminDashboard() {
 
   const fetchNominees = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/nominees");
+      const response = await axios.get("https://ballon-dor-backend-production.up.railway.app/api/nominees");
       setNominees(response.data);
     } catch (error) {
       console.error(error);
@@ -113,7 +113,7 @@ function AdminDashboard() {
     e.preventDefault();
 
     try {
-      await axios.post("http://localhost:5000/api/nominees", {
+      await axios.post("https://ballon-dor-backend-production.up.railway.app/api/nominees", {
         name: formData.name,
         category_id: categoryMap[formData.category],
         club: formData.club,
@@ -132,7 +132,7 @@ function AdminDashboard() {
 
     try {
       await axios.put(
-        `http://localhost:5000/api/nominees/${selectedNominee.id}`,
+        `https://ballon-dor-backend-production.up.railway.app/api/nominees/${selectedNominee.id}`,
         {
           name: formData.name,
           category_id: categoryMap[formData.category],
@@ -151,7 +151,7 @@ function AdminDashboard() {
   const handleDeleteNominee = async () => {
     try {
       await axios.delete(
-        `http://localhost:5000/api/nominees/${selectedNominee.id}`
+        `https://ballon-dor-backend-production.up.railway.app/api/nominees/${selectedNominee.id}`
       );
 
       await fetchNominees();

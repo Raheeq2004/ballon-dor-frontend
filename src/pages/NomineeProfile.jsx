@@ -97,11 +97,11 @@ function NomineeProfile() {
   const fetchPlayer = async () => {
     try {
       const playerResponse = await axios.get(
-        `http://localhost:5000/api/nominees/${id}`
+        `https://ballon-dor-backend-production.up.railway.app/api/nominees/${id}`
       );
 
       const allNomineesResponse = await axios.get(
-        "http://localhost:5000/api/nominees"
+        "https://ballon-dor-backend-production.up.railway.app/api/nominees"
       );
 
       const currentPlayer = playerResponse.data;
@@ -144,7 +144,7 @@ function NomineeProfile() {
 
   try {
     const response = await axios.post(
-      `http://localhost:5000/api/nominees/${id}/vote`,
+      `https://ballon-dor-backend-production.up.railway.app/api/nominees/${id}/vote`,
       {
         user_id: user.id,
       }
