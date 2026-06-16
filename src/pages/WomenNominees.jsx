@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 import bonmati from "../assets/bonmati.jpg";
 import caroline from "../assets/caroline.jpg";
-import sam from "../assets/Sam.jpg";
+import sam from "../assets/sam.jpg";
 import wendie from "../assets/wendie.jpg";
 import alexia from "../assets/alexia.jpg";
 import beth from "../assets/beth.jpg";
