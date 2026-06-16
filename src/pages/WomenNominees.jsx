@@ -6,13 +6,13 @@ import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 
 import bonmati from "../assets/bonmati.jpg";
-import caroline from "../assets/Caroline.jpg";
+import caroline from "../assets/caroline.jpg";
 import sam from "../assets/Sam.jpg";
-import wendie from "../assets/Wendie.jpg";
+import wendie from "../assets/wendie.jpg";
 import alexia from "../assets/alexia.jpg";
 import beth from "../assets/beth.jpg";
-import ada from "../assets/Ada.jpg";
-import sophia from "../assets/Sophia.jpg";
+import ada from "../assets/ada.jpg";
+import sophia from "../assets/sophia.jpg";
 
 function WomenNominees() {
   const navigate = useNavigate();

@@ -7,13 +7,13 @@ import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 
 import jude from "../assets/jude.jpg";
-import gavi from "../assets/Pablo.jpg";
+import gavi from "../assets/pablo.jpg";
 import musiala from "../assets/jamal.jpg";
 import pedri from "../assets/pedri.jpg";
 import yamal from "../assets/lamine.jpg";
 import wirtz from "../assets/wirtz.jpg";
-import endrick from "../assets/Endrick.jpg";
-import arda from "../assets/Arda.jpg";
+import endrick from "../assets/endrick.jpg";
+import arda from "../assets/arda.jpg";
 
 function KopaNominees() {
   const navigate = useNavigate();
