@@ -7,12 +7,12 @@ import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 
 import martiniez from "../assets/martiniez.jpg";
-import courtois from "../assets/Courtois.jpg";
-import alisson from "../assets/Alisson.jpg";
-import ederson from "../assets/Ederson.jpg";
-import mike from "../assets/Mike.jpg";
-import marc from "../assets/Marc.jpg";
-import donnarumma from "../assets/Donnarumma.jpg";
+import courtois from "../assets/courtois.jpg";
+import alisson from "../assets/alisson.jpg";
+import ederson from "../assets/ederson.jpg";
+import mike from "../assets/mike.jpg";
+import marc from "../assets/marc.jpg";
+import donnarumma from "../assets/donnarumma.jpg";
 import jan from "../assets/jan.jpg";
 
 function YachineNominees() {

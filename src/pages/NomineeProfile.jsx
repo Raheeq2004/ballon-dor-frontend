@@ -16,31 +16,31 @@ import haaland from "../assets/haaland.jpg";
 
 
 import bonmati from "../assets/bonmati.jpg";
-import caroline from "../assets/Caroline.jpg";
-import sam from "../assets/Sam.jpg";
-import wendie from "../assets/Wendie.jpg";
+import caroline from "../assets/caroline.jpg";
+import sam from "../assets/sam.jpg";
+import wendie from "../assets/wendie.jpg";
 import alexia from "../assets/alexia.jpg";
 import beth from "../assets/beth.jpg";
-import ada from "../assets/Ada.jpg";
-import sophia from "../assets/Sophia.jpg";
+import ada from "../assets/ada.jpg";
+import sophia from "../assets/sophia.jpg";
 
 import martiniez from "../assets/martiniez.jpg";
-import courtois from "../assets/Courtois.jpg";
-import alisson from "../assets/Alisson.jpg";
-import ederson from "../assets/Ederson.jpg";
-import mike from "../assets/Mike.jpg";
-import marc from "../assets/Marc.jpg";
-import donnarumma from "../assets/Donnarumma.jpg";
+import courtois from "../assets/courtois.jpg";
+import alisson from "../assets/alisson.jpg";
+import ederson from "../assets/ederson.jpg";
+import mike from "../assets/mike.jpg";
+import marc from "../assets/marc.jpg";
+import donnarumma from "../assets/donnarumma.jpg";
 import jan from "../assets/jan.jpg";
 
 import jude from "../assets/jude.jpg";
-import gavi from "../assets/Pablo.jpg";
+import gavi from "../assets/pablo.jpg";
 import musiala from "../assets/jamal.jpg";
 import pedri from "../assets/pedri.jpg";
 import yamal from "../assets/lamine.jpg";
 import wirtz from "../assets/wirtz.jpg";
-import endrick from "../assets/Endrick.jpg";
-import arda from "../assets/Arda.jpg";
+import endrick from "../assets/endrick.jpg";
+import arda from "../assets/arda.jpg";
 
 function NomineeProfile() {
   const [hasVoted, setHasVoted] = useState(false);
