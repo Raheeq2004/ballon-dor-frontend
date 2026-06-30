@@ -256,7 +256,5 @@ The final deployed system supports:
 
 ## 👨‍💻 Author
 
-Raheeq Mheidat
-
 Special Topics in Computer Science
 Full Stack Web Application Project
