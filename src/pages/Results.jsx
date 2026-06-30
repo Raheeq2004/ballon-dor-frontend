@@ -13,7 +13,7 @@ function Results() {
       const response = await axios.get(
         "https://ballon-dor-backend-production.up.railway.app/api/nominees"
       );
-
+  
       const nominees = response.data;
 
       const categories = [
